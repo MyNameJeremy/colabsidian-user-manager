@@ -1,0 +1,27 @@
+{
+  "um": {
+    "default_perms": 0,
+    "general_keys": [
+      { "hash": "guest", "perms": 0 },
+      { "hash": "admin", "perms": 31 }
+    ],
+    "users": [
+      {
+        "name": "pwUser",
+        "hash": "userPassword",
+        "perms": 0,
+        "maxConnection": 1,
+        "useAuthKey": false
+      },
+      {
+        "name": "keyUser",
+        "hash": "userKey",
+        "perms": 31,
+        "maxConnection": 1,
+        "useAuthKey": true
+      }
+    ]
+  },
+  "db": { "port": 1337 }
+}
+

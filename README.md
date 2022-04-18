@@ -1,6 +1,6 @@
 # ColabSidian User Manager
 
-this is the Repo for the custom user manager I wrote for ColabSidian
+this is the Repo for the custom user manager I am writing for ColabSidian
 It is used by the SyncServer backend of Colabsidian
 
 it has a default user

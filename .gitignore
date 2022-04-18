@@ -1,0 +1,8 @@
+#VSCode
+.vscode/
+
+#Node
+node_modules/
+**/*package-lock.json
+
+todo.md

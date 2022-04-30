@@ -65,3 +65,8 @@ the perm range is 0 - 31
 so a user that is allowed to do everything would have the perm-value `31`
 and a user that is only allowed to read, write & delte from files would have the perm-value `7`
 
+## todo
+
+read the todo.md to see what is in planning
+(everything in the todo.md should be seen as beeing considered but not confirmed to be 'todo')
+

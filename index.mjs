@@ -26,20 +26,17 @@ function ensure(val, err_msg, true_return = val, false_return = false) {
 }
 
 class user_manager {
-  constructor(config) {
     /**
      * @type {Object.<string, User>}
      */
-    this.users = {};
-
+  users = {};
     /**
      * @type {Object.<string, GeneralKey>}
      */
-    this.keys = {};
+  keys = {};
 
-    for (const user of config.um.users) {
-      this.users[user.name] = { ...user, connections: 0 };
-    }
+  constructor(config) {
+    for (const user of config.um.users) this.users[user.name] = { ...user, connections: 0 };
 
     for (const key of config.um.general_keys) this.keys[key.hash] = key;
   }

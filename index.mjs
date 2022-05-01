@@ -26,13 +26,13 @@ function ensure(val, err_msg, true_return = val, false_return = false) {
 }
 
 class user_manager {
-    /**
-     * @type {Object.<string, User>}
-     */
+  /**
+   * @type {Object.<string, User>}
+   */
   users = {};
-    /**
-     * @type {Object.<string, GeneralKey>}
-     */
+  /**
+   * @type {Object.<string, GeneralKey>}
+   */
   keys = {};
 
   constructor(config) {
@@ -44,11 +44,10 @@ class user_manager {
   /**
    * @param {string} name name of the user or an empty string
    * @param {string} hash cryptographic key or hash of a users password
-   * @param {number} new_perm new permissions of a user or general key
-   * @returns {boolean} was the modification successful?
+   * @return {number} permissions of the User / GeneralKey
    */
   login(name = '', hash) {
-    let inc_con = (name) => {
+    let increment_connection_counter = (name) => {
       this.users[name].connections += 1;
       return this.users[name].perms;
     };
@@ -57,27 +56,26 @@ class user_manager {
 
     if (!this.users[name]) return console.error('invalid user name') || -1;
 
-    const { hash: u_hash, useAuthKey: u_useAuthKey, perms: u_perms } = this.users[name];
-    return ensure(hash === u_hash, `invalid user ${u_useAuthKey ? 'key' : 'password'}`, u_perms, -1);
+    const { hash: u_hash, useAuthKey: u_useAuthKey } = this.users[name];
+    return ensure(hash === u_hash, `invalid user ${u_useAuthKey ? 'key' : 'password'}`, increment_connection_counter(name), -1);
   }
 
   /**
-   * @param {GeneralKey} general_key the new general key
-   * @returns {void}
+   * @param {GeneralKey} key the new general key
+   * @returns {boolean}
    */
   add_general_key(key) {
-    this.keys[key.hash] = key;
+    return !!(this.keys[key.hash] = key);
   }
 
   /**
    * @param {User} user
-   * @returns {void}
-   * * this function should be wrapped by a handler that retuerns a bool for
-   * * success or failure and might also manage (a) db-connection(s) only admins
-   * * should be allowed to add or modify users
+   * @returns {boolean}
+   * * this function maybe should be wrapped by a handler that manages (a) db-connection(s)
+   * * also only admins should be allowed to add or modify users
    */
   add_user(user) {
-    return ensure(!this.users[user.name], 'user already exists', (this.users[name] = user && true), false);
+    return ensure(!this.users[user.name], 'user already exists', !!(this.users[user.name] = user), false);
   }
 
   /**
@@ -87,8 +85,7 @@ class user_manager {
    * @returns {boolean} was the modification successful?
    */
   modify_perms(name = '', hash, new_perm) {
-    if (name === '') return (this.keys[hash].perms = new_perm) && true;
-    else if (hash === this.users[name].hash) return (this.users[name].perms = new_perm) && true;
-    return false;
+    if (name === '') return ensure(this.keys[hash], 'key does not exist', !!(this.keys[hash].perms = new_perm));
+    return ensure(hash === this.users[name].hash, 'invalid hash', !!(this.users[name].perms = new_perm));
   }
 }

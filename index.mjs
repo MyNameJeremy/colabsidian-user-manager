@@ -44,9 +44,9 @@ class user_manager {
   /**
    * @param {string} name name of the user or an empty string
    * @param {string} hash cryptographic key or hash of a users password
-   * @return {number} permissions of the User / GeneralKey
+   * @return {number} permissions of the User / GeneralKey (-1 indicates login-failure)
    */
-  login(name = '', hash) {
+  login(hash, name = '') {
     let increment_connection_counter = (name) => {
       this.users[name].connections += 1;
       return this.users[name].perms;
@@ -84,7 +84,7 @@ class user_manager {
    * @param {number} new_perm new permissions of a user or general key
    * @returns {boolean} was the modification successful?
    */
-  modify_perms(name = '', hash, new_perm) {
+  modify_perms(hash, new_perm, name = '') {
     if (name === '') return ensure(this.keys[hash], 'key does not exist', !!(this.keys[hash].perms = new_perm));
     return ensure(hash === this.users[name].hash, 'invalid hash', !!(this.users[name].perms = new_perm));
   }

@@ -103,11 +103,18 @@ class user_manager {
   /**
    * @param {string} name name of the user or an empty string
    * @param {string} hash cryptographic key or hash of a users password
-   * @param {number} new_perm new permissions of a user or general key
+   * @param {number} new_perms new permissions of a user or general key
    * @returns {boolean} was the modification successful?
    */
-  modify_perms(hash, new_perm, name = '') {
-    if (name === '') return ensure(this.keys[hash], 'key does not exist', !!(this.keys[hash].perms = new_perm));
-    return ensure(hash === this.users[name].hash, 'invalid hash', !!(this.users[name].perms = new_perm));
+  modify_perms(hash, new_perms, name = '') {
+    return name === ''
+      ? !!this.keys[hash]
+        ? this.modify_key_perms(hash, new_perm)
+        : ERR('key does not exist')
+      : !!this.users[name]
+      ? hash === this.users[name].hash
+        ? this.modify_user_perms(name, new_perms)
+        : ERR('invalid hash')
+      : ERR('user does not exist');
   }
 }

@@ -1,4 +1,8 @@
 import cfg from './config.json' assert { type: 'json' };
+function ERR(...data) {
+  console.error(data);
+  return false;
+}
 
 /**
  * @typedef User
@@ -22,7 +26,7 @@ import cfg from './config.json' assert { type: 'json' };
  * @param {any} false_return value that is returned when val is falsy (default is false)
  */
 function ensure(val, err_msg, true_return = val, false_return = false) {
-  return !!val ? true_return : console.error(err_msg) || false_return;
+  return !!val ? true_return : ERR(err_msg) || false_return;
 }
 
 class user_manager {
@@ -49,7 +53,7 @@ class user_manager {
   login(hash, name = '') {
     if (name === '') return ensure(this.keys[hash], 'invalid general key', this.keys[hash].perms, -1);
 
-    if (!this.users[name]) return console.error('invalid user name') || -1;
+    if (!this.users[name]) return ERR('invalid user name') || -1;
 
     const { hash: u_hash, useAuthKey: u_useAuthKey } = this.users[name];
     return hash === u_hash
@@ -57,7 +61,7 @@ class user_manager {
           this.users[n].connections++;
           return this.users[n].perms;
         })(name)
-      : console.error(`invalid user ${u_useAuthKey ? 'key' : 'password'}`) || -1;
+      : ERR(`invalid user ${u_useAuthKey ? 'key' : 'password'}`) || -1;
   }
 
   /**

@@ -79,6 +79,24 @@ class user_manager {
   }
 
   /**
+   * @param {string} name name of the user
+   * @param {number} new_perms new permissions of the user
+   * @returns {boolean} was the modification successful?
+   */
+  modify_user_perms(name, new_perms) {
+    return !!(this.users[name].perms = new_perms);
+  }
+
+  /**
+   * @param {string} hash cryptographic key
+   * @param {number} new_perms new permissions of the general key
+   * @returns {boolean} was the modification successful?
+   */
+  modify_key_perms(hash, new_perms) {
+    return !!(this.keys[hash].perms = new_perms);
+  }
+
+  /**
    * @param {string} name name of the user or an empty string
    * @param {string} hash cryptographic key or hash of a users password
    * @param {number} new_perm new permissions of a user or general key

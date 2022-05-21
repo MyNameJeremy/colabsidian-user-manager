@@ -47,17 +47,17 @@ class user_manager {
    * @return {number} permissions of the User / GeneralKey (-1 indicates login-failure)
    */
   login(hash, name = '') {
-    let increment_connection_counter = (name) => {
-      this.users[name].connections += 1;
-      return this.users[name].perms;
-    };
-
     if (name === '') return ensure(this.keys[hash], 'invalid general key', this.keys[hash].perms, -1);
 
     if (!this.users[name]) return console.error('invalid user name') || -1;
 
     const { hash: u_hash, useAuthKey: u_useAuthKey } = this.users[name];
-    return ensure(hash === u_hash, `invalid user ${u_useAuthKey ? 'key' : 'password'}`, increment_connection_counter(name), -1);
+    return hash === u_hash
+      ? ((n) => {
+          this.users[n].connections++;
+          return this.users[n].perms;
+        })(name)
+      : console.error(`invalid user ${u_useAuthKey ? 'key' : 'password'}`) || -1;
   }
 
   /**

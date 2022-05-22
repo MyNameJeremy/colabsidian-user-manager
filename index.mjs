@@ -5,6 +5,10 @@ function ERR(...data) {
   return false;
 }
 
+function WARN(...data) {
+  console.warn(...data);
+}
+
 /**
  * @param {any} val value
  * @param {string} err_msg error message

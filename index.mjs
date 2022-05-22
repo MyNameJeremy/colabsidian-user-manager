@@ -55,6 +55,7 @@ class user_manager {
    * @returns {boolean}
    */
   add_general_key(key) {
+    if (!!this.keys[key.hash]) WARN(`overwriting key ${key.hash}`);
     return !!(this.keys[key.hash] = key);
   }
 
@@ -65,7 +66,8 @@ class user_manager {
    * * also only admins should be allowed to add or modify users
    */
   add_user(user) {
-    return ensure(!this.users[user.name], 'user already exists', !!(this.users[user.name] = user), false);
+    if (!!this.users[user.name]) WARN(`overwriting user ${user.name}`);
+    return !!(this.users[user.name] = user);
   }
 
   /**

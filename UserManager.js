@@ -123,20 +123,38 @@ class UserManager {
   }
 }
 
-/**
- * @typedef User
- * @type {Object}
- * @property {string} name name of the user
- * @property {string} hash users cryptographic key or hash of the users password
- * @property {number} perms permissions of the user
- * @property {number} maxConnection maximum amount of concurrent connections of a user
- * @property {boolean} useAuthKey is the user using a cryptographic key?
- *
- * @typedef GeneralKey
- * @type {Object}
- * @property {string} hash cryptographic key of the general key
- * @property {number} perms permissions of the general key
- */
+class User {
+  /** @type {string} name of the user */
+  name;
+  /** @type {string} users cryptographic key or hash of the users password */
+  hash;
+  /** @type {number} permissions of the user */
+  perms;
+  /** @type {number} maximum amount of concurrent connections of a user */
+  maxConnection;
+  /** @type {boolean} is the user using a cryptographic key? */
+  useAuthKey;
+
+  constructor(name = ' ', hash = '', perms = -1, maxConnection = 1, useAuthKey = false) {
+    this.name = name;
+    this.hash = hash;
+    this.perms = perms;
+    this.maxConnection = maxConnection;
+    this.useAuthKey = useAuthKey;
+  }
+}
+
+class GeneralKey {
+  /** @type {string} cryptographic key of the general key */
+  hash;
+  /** @type {number} permissions of the general key */
+  perms;
+
+  constructor(hash = '', perms = -1) {
+    this.hash = hash;
+    this.perms = perms;
+  }
+}
 
 module.export = { UserManager, Types: { User, GeneralKey } };
 

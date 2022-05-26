@@ -38,10 +38,11 @@ class UserManager {
   /**
    * @param {string} name name of the user or an empty string
    * @param {string} hash cryptographic key or hash of a users password
-   * @return {number} permissions of the User / GeneralKey (-1 indicates login-failure)
+   * @param {bool} return_only_perms wether or not login should only return perms or a full User/GeneralKey object
+   * @return {(number|(User|GeneralKey))} permissions of the User/GeneralKey or the complete User/GeneralKey (-1 indicates login-failure)
    */
-  login(hash, name = '') {
-    if (name === '') return ensure(this.keys[hash], 'invalid general key', this.keys[hash].perms, -1);
+  login(hash, name = '', return_only_perms = true) {
+    if (name === '') return ensure(this.keys[hash], 'invalid general key', return_only_perms ? this.keys[hash].perms : this.keys[hash], -1);
 
     if (!this.users[name]) return ERR('invalid user name') || -1;
 
@@ -49,7 +50,7 @@ class UserManager {
     return hash === u_hash
       ? ((n) => {
           this.users[n].connections++;
-          return this.users[n].perms;
+          return return_only_perms ? this.users[n].perms : this.users[n];
         })(name)
       : ERR(`invalid user ${u_useAuthKey ? 'key' : 'password'}`) || -1;
   }

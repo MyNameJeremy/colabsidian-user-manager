@@ -72,6 +72,21 @@ class user_manager {
   }
 
   /**
+   * @param {(User|GeneralKey)} userOrKey name of the user or an empty string
+   * @returns {boolean} was the modification successful?
+   */
+  add_user_or_key(userOrKey) {
+    let { hash, name } = userOrKey;
+    return name === undefined
+      ? !this.keys[hash]
+        ? this.add_key(userOrKey)
+        : ERR('key already exist')
+      : !this.users[name]
+      ? this.add_user(userOrKey)
+      : ERR('user already exist');
+  }
+
+  /**
    * @param {string} name name of the user
    * @param {number} new_perms new permissions of the user
    * @returns {boolean} was the modification successful?

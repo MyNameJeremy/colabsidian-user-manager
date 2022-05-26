@@ -181,5 +181,5 @@ class GeneralKey {
   }
 }
 
-module.export = { UserManager, Types: { User, GeneralKey } };
+module.exports = { UserManager, Types: { User, GeneralKey } };
 

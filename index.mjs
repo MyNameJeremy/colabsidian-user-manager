@@ -1,5 +1,6 @@
 //import cfg from './config.json' assert { type: 'json' };
 
+/** @returns {fasle} always false */
 function ERR(...data) {
   console.error(data);
   return false;

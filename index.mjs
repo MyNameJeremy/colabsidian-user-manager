@@ -55,7 +55,7 @@ class user_manager {
    * @param {GeneralKey} key the new general key
    * @returns {boolean}
    */
-  add_general_key(key) {
+  add_key(key) {
     if (!!this.keys[key.hash]) WARN(`overwriting key ${key.hash}`);
     return !!(this.keys[key.hash] = key);
   }

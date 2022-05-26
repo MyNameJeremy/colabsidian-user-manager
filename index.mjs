@@ -6,8 +6,10 @@ function ERR(...data) {
   return false;
 }
 
+/** @returns {false} always false */
 function WARN(...data) {
   console.warn(...data);
+  return false;
 }
 
 /**

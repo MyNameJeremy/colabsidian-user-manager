@@ -10,6 +10,11 @@ function WARN(...data) {
   return false;
 }
 
+/** @returns {void} always void */
+function LOG(...data) {
+  console.log(...data);
+}
+
 /**
  * @param {any} val value
  * @param {string} err_msg error message

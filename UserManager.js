@@ -1,13 +1,11 @@
 /** @returns {fasle} always false */
 function ERR(...data) {
-  console.error(data);
-  return false;
+  return !!console.error(data);
 }
 
 /** @returns {false} always false */
 function WARN(...data) {
-  console.warn(...data);
-  return false;
+  return !!console.warn(...data);
 }
 
 /** @returns {void} always void */

@@ -1,5 +1,3 @@
-//import cfg from './config.json' assert { type: 'json' };
-
 /** @returns {fasle} always false */
 function ERR(...data) {
   console.error(data);
@@ -22,7 +20,7 @@ function ensure(val, err_msg, true_return = val, false_return = false) {
   return !!val ? true_return : ERR(err_msg) || false_return;
 }
 
-class user_manager {
+class UserManager {
   /** @type {Object.<string, User>} */
   users = {};
   /** @type {Object.<string, GeneralKey>}*/
@@ -139,4 +137,6 @@ class user_manager {
  * @property {string} hash cryptographic key of the general key
  * @property {number} perms permissions of the general key
  */
+
+module.export = { UserManager, Types: { User, GeneralKey } };
 

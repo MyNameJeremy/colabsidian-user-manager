@@ -105,15 +105,15 @@ class user_manager {
   }
 
   /**
-   * @param {string} name name of the user or an empty string
-   * @param {string} hash cryptographic key or hash of a users password
+   * @param {(User|GeneralKey)} userOrKey the User otr GeneralKey to be modified
    * @param {number} new_perms new permissions of a user or general key
    * @returns {boolean} was the modification successful?
    */
-  modify_perms(hash, new_perms, name = '') {
-    return name === ''
+  modify_perms(userOrKey, new_perms) {
+    let { hash, name } = userOrKey;
+    return name === undefined
       ? !!this.keys[hash]
-        ? this.modify_key_perms(hash, new_perm)
+        ? this.modify_key_perms(hash, new_perms)
         : ERR('key does not exist')
       : !!this.users[name]
       ? hash === this.users[name].hash

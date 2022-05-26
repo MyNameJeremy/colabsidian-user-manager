@@ -57,6 +57,26 @@ class UserManager {
   }
 
   /**
+   * @param {string} name name of the user or an empty string
+   * @param {string} hash cryptographic key or hash of a users password
+   * @returns {bool} returns wwether or not the logout was successfull
+   */
+  logout(hash, name = '') {
+    if (name === '') return LOG('loged out with key', hash) || true;
+
+    if (!this.users[name]) return ERR('invalid user name');
+
+    const { hash: u_hash, useAuthKey: u_useAuthKey } = this.users[name];
+    return hash === u_hash
+      ? !!this.users[name].connections-- ||
+          ((n) => {
+            this.users[n].connections = 0;
+            return ERR(`user doesn't have any registered connections`);
+          })(name)
+      : ERR(`invalid user ${u_useAuthKey ? 'key' : 'password'}`);
+  }
+
+  /**
    * @param {GeneralKey} key the new general key
    * @returns {boolean}
    */

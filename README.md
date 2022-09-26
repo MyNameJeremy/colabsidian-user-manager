@@ -63,6 +63,6 @@ and a user that is only allowed to read, write & delte from files would have the
 
 ## todo
 
-read the todo.md to see what is in planning
-(everything in the todo.md should be seen as beeing considered but not confirmed to be 'todo')
+Read the todo.md to see what is in planning.
+(everything in the todo.md should be seen as being considered but not confirmed to be "todo").
 

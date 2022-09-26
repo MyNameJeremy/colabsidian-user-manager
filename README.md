@@ -30,18 +30,15 @@ config.json:
 }
 ```
 
-> 'um' and 'db' are seperate
-> so you could use the same config file
-> when you want to use a different DB sollution
-
+> 'um' and 'db' are separate, so you could use the same config file when you want to use a different DB solution.
 User:
 
-| key           | value  | description                                                       |
+| key           | value  | description                                                       |
 | ------------- | ------ | ----------------------------------------------------------------- |
-| useAuthKey    | bool   | wether the user uses a cript. key to authenticate                 |
-| name          | str    | name of the user                                                  |
-| auth          | string | hash of the password or key                                       |
-| maxConnection | number | maximum amount of simultanious connections logged in as this user |
+useAuthKey | bool | whether the user authenticates with a cryptographic key
+| name          | str    | name of the user                                                  |
+| auth | string | password or key hash |
+maxConnection | number | the maximum number of concurrent connections logged in as this user |
 
 ### um (User Manager)
 

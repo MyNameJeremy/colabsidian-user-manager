@@ -1,19 +1,19 @@
 # ColabSidian User Manager
 
-this is the Repo for the custom user manager I am writing for ColabSidian
-It is used by the SyncServer backend of Colabsidian
+This is the repo for the custom user manager I am writing for ColabSidian.
+It is used by the SyncServer backend of ColabSidian.
 
-it has a default user
-every connection to the sync server has permissions based on the given permissions for the user it is logged in as
-it uses the default User as a fallback / template when creating a new user
+It has a default user.
+Every connection to the sync server has permissions based on the given permissions for the user it is logged in as.
+It uses the default user as a fallback/template when creating a new user.
 
-there are 3 ways of logging in
+There are 3 ways of logging in.
 
-- username & password (has specific perms for a singular user) <!--? only one connection by each user???? -->
+- username & password (has specific perms for a singular user) <!--? only one connection per user???? -->
 - username & key (has specific perms for a singular user) <!--? sha256/RSA??? -->
-- general key (has general perms for everyone with this key so it can be used as a "geust" user) <!--? simple pass-phrase possible??? -->
+- general key (has general perms for everyone with this key, so it can be used as a "guest" user) <!--? simple pass-phrase possible??? -->
 
-the username dependant login methods can be configred to allow a certain number of connection per user (default 1)
+The username-dependent login methods can be configured to allow a certain number of connections per user (default 1)
 
 ## Config
 

@@ -31,14 +31,14 @@ config.json:
 ```
 
 > 'um' and 'db' are separate, so you could use the same config file when you want to use a different DB solution.
-User:
+> User:
 
-| key           | value  | description                                                       |
-| ------------- | ------ | ----------------------------------------------------------------- |
-useAuthKey | bool | whether the user authenticates with a cryptographic key
-| name          | str    | name of the user                                                  |
-| auth | string | password or key hash |
-maxConnection | number | the maximum number of concurrent connections logged in as this user |
+| key            | value   | description                                                         |
+| -------------- | ------- | ------------------------------------------------------------------- |
+| useAuthKey     | bool    | whether the user authenticates with a cryptographic key             |
+| name           | str     | name of the user                                                    |
+| auth           | string  | password or key hash                                                |
+| maxConnection  | number  | the maximum number of concurrent connections logged in as this user |
 
 ### um (User Manager)
 
@@ -65,4 +65,3 @@ and a user that is only allowed to read, write & delte from files would have the
 
 Read the todo.md to see what is in planning.
 (everything in the todo.md should be seen as being considered but not confirmed to be "todo").
-

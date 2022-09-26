@@ -42,12 +42,11 @@ maxConnection | number | the maximum number of concurrent connections logged in 
 
 ### um (User Manager)
 
-perms are stores as a number <!--TODO maybe add more perm options-->
-in js numbers aren't ints, so you have to imagin
-you can imagin each int bit beeing a flag for a perm
+Perms are stored as a number <!--TODO maybe add more perm options-->
+In JS, numbers aren't ints. So you can imagine each int bit being a flag for a perm.
 
-- reading is allways permitted
-- files and folders are handeled the same
+- Reading is always permitted.
+- Files and folders are handled the same.
 
 | bit | flag             |
 | --- | ---------------- |
@@ -57,9 +56,9 @@ you can imagin each int bit beeing a flag for a perm
 | 3   | move a file      |
 | 4   | delete file      |
 
-the perm range is 0 - 31
+The perm range is 0 - 31
 
-so a user that is allowed to do everything would have the perm-value `31`
+So a user that is allowed to do everything would have the perm-value `31`
 and a user that is only allowed to read, write & delte from files would have the perm-value `7`
 
 ## todo
